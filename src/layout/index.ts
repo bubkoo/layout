@@ -32,7 +32,7 @@ export {
   FruchtermanGPULayout,
   GForceGPULayout,
   ComboForceLayout,
-  ForceAtlas2Layout
+  ForceAtlas2Layout,
 };
 
 // types file

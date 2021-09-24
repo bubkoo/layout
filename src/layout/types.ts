@@ -328,6 +328,13 @@ export interface ForceAtlas2LayoutOptions {
   barnesHut?: boolean;
   prune?: boolean;
 }
+
+export interface ERLayoutOptions {
+  type: "er";
+  width?: number;
+  height?: number;
+  nodeMinGap?: number;
+}
 export namespace ILayout {
   export type LayoutTypes =
     | "grid"
@@ -343,7 +350,8 @@ export namespace ILayout {
     | "gForce"
     | "gForce-gpu"
     | "comboForce"
-    | 'forceAtlas2';
+    | "forceAtlas2"
+    | "er";
 
   export type LayoutOptions =
     | GridLayoutOptions
