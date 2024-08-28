@@ -844,12 +844,14 @@ export interface ComboCombinedLayoutOptions {
    */
   spacing?: number | ((d?: Node) => number);
   /**
-   * <zh/> 最外层的布局算法，默认为 gForce
+   * <zh/> 最外层的布局算法，默认为 force
    *
-   * <en/> The outermost layout algorithm, default to gForce
+   * <en/> The outermost layout algorithm, default to force
    * @example
    * ```ts
-   * outerLayout: new G6.Layout['gForce']({
+   * import { ForceLayout } from '@antv/layout';
+   * 
+   * outerLayout: new ForceLayout({
    * gravity: 1,
    * factor: 2,
    * linkDistance: (edge: any, source: any, target: any) => {
@@ -858,7 +860,7 @@ export interface ComboCombinedLayoutOptions {
    *   }
    *  });
    * ```
-   * @defaultVaule GForce 实例
+   * @defaultVaule ForceLayout
    */
   outerLayout?: Layout<any>;
   /**
@@ -867,11 +869,13 @@ export interface ComboCombinedLayoutOptions {
    * <en/> The layout algorithm inside the combo, which needs to use a synchronized layout algorithm, default to concentric
    * @example
    * ```ts
-   * innerLayout: new G6.Layout['concentric']({
+   * import { ConcentricLayout } from '@antv/layout';
+   * 
+   * innerLayout: new ConcentricLayout({
    *  sortBy: 'id'
    *  });
    * ```
-   * @defaultVaule Concentric 实例
+   * @defaultVaule ConcentricLayout
    */
   innerLayout?: Layout<any>;
   /**
