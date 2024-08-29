@@ -12,6 +12,7 @@ import type {
   Node,
   OutNode,
 } from './types';
+import { isLayoutWithIterations } from './types';
 import { getLayoutBBox, graphTreeDfs, isArray } from './util';
 import { handleSingleNodeGraph } from './util/common';
 
@@ -116,7 +117,7 @@ export class ComboCombinedLayout implements Layout<ComboCombinedLayoutOptions> {
     });
 
     // each one in comboNodes is a combo contains the size and child nodes
-    // comboNodes ncludes the node who has no parent combo
+    // comboNodes includes the node who has no parent combo
     const comboNodes: Map<ID, Node> = new Map();
     // the inner layouts, the result positions are stored in comboNodes and their child nodes
     const innerGraphLayoutPromises = this.getInnerGraphs(
@@ -214,7 +215,8 @@ export class ComboCombinedLayout implements Layout<ComboCombinedLayoutOptions> {
               : new ConcentricLayout();
           await outerLayoutPreset.assign(outerLayoutGraph);
         }
-        outerPositions = await outerLayout.execute(outerLayoutGraph, {
+
+        const options = {
           center,
           kg: 5,
           preventOverlap: true,
@@ -232,7 +234,13 @@ export class ComboCombinedLayout implements Layout<ComboCombinedLayoutOptions> {
                 },
               }
             : {}),
-        });
+        };
+
+        outerPositions = await executeLayout(
+          outerLayout,
+          outerLayoutGraph,
+          options,
+        );
       }
 
       // move the combos and their child nodes
@@ -400,7 +408,7 @@ export class ComboCombinedLayout implements Layout<ComboCombinedLayoutOptions> {
         },
       });
 
-      let start = Promise.resolve();
+      let start: Promise<any> = Promise.resolve();
 
       // Regard the child nodes in one combo as a graph, and layout them from bottom to top
       graphTreeDfs(
@@ -479,14 +487,16 @@ export class ComboCombinedLayout implements Layout<ComboCombinedLayoutOptions> {
             // innerGraphLayout.assign(innerGraphCore, innerLayoutOptions);
             start = start.then(async () => {
               const innerGraphCore = new GraphCore(innerGraphData);
-              const innerLayout = await innerGraphLayout.assign(
+              await executeLayout(
+                innerGraphLayout,
                 innerGraphCore,
                 innerLayoutOptions,
+                true,
               );
               const { minX, minY, maxX, maxY } = getLayoutBBox(
                 innerLayoutNodes as OutNode[],
               );
-              // move the innerGraph to [0, 0], for later controled by parent layout
+              // move the innerGraph to [0, 0], for later controlled by parent layout
               const center = { x: (maxX + minX) / 2, y: (maxY + minY) / 2 };
               innerGraphData.nodes.forEach((node) => {
                 node.data.x -= center.x;
@@ -499,7 +509,6 @@ export class ComboCombinedLayout implements Layout<ComboCombinedLayoutOptions> {
 
               comboNodes.get(treeNode.id).data.size = size;
               comboNodes.get(treeNode.id).data.nodes = innerLayoutNodes;
-              return innerLayout;
             });
           }
           return true;
@@ -511,4 +520,19 @@ export class ComboCombinedLayout implements Layout<ComboCombinedLayoutOptions> {
     });
     return innerLayoutPromises;
   }
+}
+
+async function executeLayout(
+  layout: Layout<any>,
+  graph: Graph,
+  options: Record<string, any>,
+  assign?: boolean,
+) {
+  if (isLayoutWithIterations(layout)) {
+    layout.execute(graph, options);
+    layout.stop();
+    return layout.tick(options.iterations ?? 300);
+  }
+  if (assign) return await layout.assign(graph, options);
+  return await layout.execute(graph, options);
 }

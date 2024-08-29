@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "device": {
+    "os": {
+      "arch": "arm64",
+      "distro": "macOS",
+      "serial": "9821ed36011eee5abf6c71d6fc2c03fb4bf4655e674c56b7f50e2560cb6e924a"
+    },
+    "cpu": {
+      "manufacturer": "Apple",
+      "brand": "M1 Pro",
+      "speed": 2.4,
+      "cores": 10
+    },
+    "memory": {
+      "total": 16384,
+      "free": 121.796875
+    },
+    "gpu": {
+      "vendor": "Apple",
+      "model": "Apple M1 Pro",
+      "cores": "16"
+    }
+  },
+  "repo": "ee6714c42b02ba09912e17bc405d2607caf25e69",
+  "client": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/128.0.6613.18 Safari/537.36",
+  "reports": {
+    "comboCombined": {
+      "time": [
+        {
+          "min": 2.800000011920929,
+          "max": 19,
+          "median": 3.6000000089406967,
+          "avg": 4.500000001862645,
+          "variance": 6.094999999850989,
+          "reliable": false,
+          "key": "combo combined"
+        }
+      ],
+      "status": "passed"
+    }
+  }
+}
