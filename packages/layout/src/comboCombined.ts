@@ -3,16 +3,16 @@ import { isFunction, isNumber, isObject } from '@antv/util';
 import { ConcentricLayout } from './concentric';
 import { ForceLayout } from './force';
 import { MDSLayout } from './mds';
-import {
-  isLayoutWithIterations,
-  type ComboCombinedLayoutOptions,
-  type Edge,
-  type Graph,
-  type Layout,
-  type LayoutMapping,
-  type Node,
-  type OutNode,
+import type {
+  ComboCombinedLayoutOptions,
+  Edge,
+  Graph,
+  Layout,
+  LayoutMapping,
+  Node,
+  OutNode,
 } from './types';
+import { isLayoutWithIterations } from './types';
 import { getLayoutBBox, graphTreeDfs, isArray } from './util';
 import { handleSingleNodeGraph } from './util/common';
 
