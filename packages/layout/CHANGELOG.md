@@ -1,5 +1,11 @@
 # @antv/layout
 
+## 1.2.14-beta.6
+
+### Patch Changes
+
+- optimize combo-combined performance
+
 ## 1.2.4
 
 ### Patch Changes
