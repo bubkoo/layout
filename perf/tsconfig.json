@@ -1,0 +1,8 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@antv/layout": ["../packages/layout/src/index.ts"]
+    }
+  },
+}
