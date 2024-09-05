@@ -22,19 +22,9 @@ const DEFAULTS_LAYOUT_OPTIONS: Partial<MDSLayoutOptions> = {
 };
 
 /**
- * Layout arranging the nodes with multiple dimensional scaling algorithm
+ * <zh/> 多维缩放算法布局
  *
- * @example
- * // Assign layout options when initialization.
- * const layout = new MDSLayout({ center: [100, 100] });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new MDSLayout({ center: [100, 100] });
- * const positions = await layout.execute(graph, { rows: 20 }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { center: [100, 100] });
+ * <en/> Multidimensional scaling layout
  */
 export class MDSLayout implements Layout<MDSLayoutOptions> {
   id = 'mds';
@@ -56,7 +46,7 @@ export class MDSLayout implements Layout<MDSLayoutOptions> {
    * To directly assign the positions to the nodes.
    */
   async assign(graph: Graph, options?: MDSLayoutOptions) {
-   await this.genericMDSLayout(true, graph, options);
+    await this.genericMDSLayout(true, graph, options);
   }
 
   private async genericMDSLayout(

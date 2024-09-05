@@ -34,19 +34,9 @@ interface WASMForceLayoutOptions
     WASMLayoutOptions {}
 
 /**
- * Layout nodes with force model
- *
- * @example
- * // Assign layout options when initialization.
- * const layout = new ForceLayout({ center: [100, 100] });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new ForceLayout({ center: [100, 100] });
- * const positions = await layout.execute(graph, { center: [100, 100] }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { center: [100, 100] });
+ * <zh/> 力导向布局（WASM 版）
+ * 
+ * <en/> Force-directed layout(WASM)
  */
 export class ForceLayout implements Layout<WASMForceLayoutOptions> {
   id = 'forceWASM';

@@ -35,19 +35,9 @@ interface FormattedOptions extends FruchtermanLayoutOptions {
 }
 
 /**
- * Layout with fructherman force model
+ * <zh/> Fruchterman 力导向布局（GPU 版）
  *
- * @example
- * // Assign layout options when initialization.
- * const layout = new FruchtermanLayout({ center: [100, 100] });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new FruchtermanLayout({ center: [100, 100] });
- * const positions = await layout.execute(graph, { center: [100, 100] }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { center: [100, 100] });
+ * <en/> Fruchterman force-directed layout(GPU)
  */
 export class FruchtermanLayout implements Layout<FruchtermanLayoutOptions> {
   id = 'fruchtermanGPU';
@@ -71,7 +61,7 @@ export class FruchtermanLayout implements Layout<FruchtermanLayoutOptions> {
    * To directly assign the positions to the nodes.
    */
   async assign(graph: Graph, options?: FruchtermanLayoutOptions) {
-   await this.genericFruchtermanLayout(true, graph, options);
+    await this.genericFruchtermanLayout(true, graph, options);
   }
 
   private async genericFruchtermanLayout(

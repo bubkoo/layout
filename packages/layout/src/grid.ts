@@ -45,19 +45,9 @@ const DEFAULTS_LAYOUT_OPTIONS: Partial<GridLayoutOptions> = {
 };
 
 /**
- * Layout arranging the nodes in a grid.
- *
- * @example
- * // Assign layout options when initialization.
- * const layout = new GridLayout({ rows: 10 });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new GridLayout({ rows: 10 });
- * const positions = await layout.execute(graph, { rows: 20 }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { rows: 20 });
+ * <zh/> 网格布局
+ * 
+ * <en/> Grid layout
  */
 export class GridLayout implements Layout<GridLayoutOptions> {
   id = 'grid';

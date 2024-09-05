@@ -9,8 +9,9 @@ export interface DagreLayoutOptions extends GraphLabel, NodeConfig, EdgeConfig {
 }
 
 /**
- * Adapt dagre.js layout
- * @link https://github.com/dagrejs/dagre
+ * <zh/> Dagre 布局
+ * 
+ * <en/> Dagre layout
  */
 export class DagreLayout implements Layout<DagreLayoutOptions> {
   static defaultOptions: Partial<DagreLayoutOptions> = {};
