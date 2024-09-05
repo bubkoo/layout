@@ -12,7 +12,7 @@ import type {
   Point,
 } from '../types';
 import { formatNumberFn, isArray } from '../util';
-import { forceNBody } from './forceNBody';
+import { forceNBody } from './force-n-body';
 import {
   CalcEdge,
   CalcEdgeData,

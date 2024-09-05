@@ -1,12 +1,12 @@
 import { AntVDagreLayout } from './antv-dagre';
 import { CircularLayout } from './circular';
-import { ComboCombinedLayout } from './comboCombined';
+import { ComboCombinedLayout } from './combo-combined';
 import { ConcentricLayout } from './concentric';
 import { D3ForceLayout } from './d3-force';
 import { D3Force3DLayout } from './d3-force-3d';
 import { DagreLayout } from './dagre';
 import { ForceLayout } from './force';
-import { ForceAtlas2Layout } from './forceAtlas2';
+import { ForceAtlas2Layout } from './force-atlas2';
 import { FruchtermanLayout } from './fruchterman';
 import { GridLayout } from './grid';
 import { MDSLayout } from './mds';

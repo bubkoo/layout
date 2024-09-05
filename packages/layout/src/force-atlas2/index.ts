@@ -18,7 +18,7 @@ import { cloneFormatData, isArray } from '../util';
 import { handleSingleNodeGraph } from '../util/common';
 import Body from './body';
 import Quad from './quad';
-import QuadTree from './quadTree';
+import QuadTree from './quad-tree';
 
 const DEFAULTS_LAYOUT_OPTIONS: Partial<ForceAtlas2LayoutOptions> = {
   center: [0, 0],

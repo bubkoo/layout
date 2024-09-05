@@ -1,7 +1,7 @@
 export * from './antv-dagre';
 export type { DagreAlign, DagreRankdir } from './antv-dagre/types';
 export * from './circular';
-export * from './comboCombined';
+export * from './combo-combined';
 export * from './concentric';
 export { D3ForceLayout } from './d3-force';
 export { D3Force3DLayout } from './d3-force-3d';
@@ -9,7 +9,7 @@ export type { D3Force3DLayoutOptions } from './d3-force-3d/types';
 export type { D3ForceLayoutOptions } from './d3-force/types';
 export * from './dagre';
 export * from './force';
-export * from './forceAtlas2';
+export * from './force-atlas2';
 export * from './fruchterman';
 export * from './grid';
 export * from './mds';
