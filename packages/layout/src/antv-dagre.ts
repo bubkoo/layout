@@ -211,19 +211,9 @@ const DEFAULTS_LAYOUT_OPTIONS: Partial<AntVDagreLayoutOptions> = {
 };
 
 /**
- * Layout arranging the nodes in a circle.
+ * <zh/> AntV 实现的 Dagre 布局
  *
- * @example
- * // Assign layout options when initialization.
- * const layout = new CircularLayout({ radius: 10 });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new CircularLayout({ radius: 10 });
- * const positions = await layout.execute(graph, { radius: 20 }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { radius: 20 });
+ * <en/> AntV implementation of Dagre layout
  */
 export class AntVDagreLayout implements Layout<AntVDagreLayoutOptions> {
   id = 'antv-dagre';

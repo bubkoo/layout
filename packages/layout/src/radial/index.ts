@@ -36,19 +36,9 @@ const DEFAULTS_LAYOUT_OPTIONS: Partial<RadialLayoutOptions> = {
 };
 
 /**
- * Layout arranging the nodes' on a radial shape
- *
- * @example
- * // Assign layout options when initialization.
- * const layout = new RadialLayout({ focusNode: 'node0' });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new RadialLayout({ focusNode: 'node0' });
- * const positions = await layout.execute(graph, { focusNode: 'node0' }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { focusNode: 'node0' });
+ * <zh/> 径向布局
+ * 
+ * <en/> Radial layout
  */
 export class RadialLayout implements Layout<RadialLayoutOptions> {
   id = 'radial';

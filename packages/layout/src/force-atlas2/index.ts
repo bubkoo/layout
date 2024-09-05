@@ -18,7 +18,7 @@ import { cloneFormatData, isArray } from '../util';
 import { handleSingleNodeGraph } from '../util/common';
 import Body from './body';
 import Quad from './quad';
-import QuadTree from './quadTree';
+import QuadTree from './quad-tree';
 
 const DEFAULTS_LAYOUT_OPTIONS: Partial<ForceAtlas2LayoutOptions> = {
   center: [0, 0],
@@ -56,19 +56,9 @@ type SizeMap = { [id: string]: number };
 type CalcGraph = GGraph<OutNodeData, EdgeData>;
 
 /**
- * Layout nodes with force atlas 2 model
- *
- * @example
- * // Assign layout options when initialization.
- * const layout = new ForceAtlas2Layout({ center: [100, 100] });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new ForceAtlas2Layout({ center: [100, 100] });
- * const positions = await layout.execute(graph, { center: [100, 100] }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { center: [100, 100] });
+ * <zh/> Atlas2 力导向布局
+ * 
+ * <en/> Force Atlas 2 layout
  */
 export class ForceAtlas2Layout implements Layout<ForceAtlas2LayoutOptions> {
   id = 'forceAtlas2';

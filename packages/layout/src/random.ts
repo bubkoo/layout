@@ -14,19 +14,9 @@ const DEFAULTS_LAYOUT_OPTIONS: Partial<RandomLayoutOptions> = {
 };
 
 /**
- * Layout randomizing the nodes' position
- *
- * @example
- * // Assign layout options when initialization.
- * const layout = new RandomLayout({ center: [100, 100] });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new RandomLayout({ center: [100, 100] });
- * const positions = await layout.execute(graph, { center: [100, 100] }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { center: [100, 100] });
+ * <zh/> 随机布局
+ * 
+ * <en/> Random layout
  */
 export class RandomLayout implements Layout<RandomLayoutOptions> {
   id = 'random';

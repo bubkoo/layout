@@ -39,19 +39,9 @@ interface FormattedOptions extends WASMFruchtermanLayoutOptions {
 }
 
 /**
- * Layout with fructherman force model
- *
- * @example
- * // Assign layout options when initialization.
- * const layout = new FruchtermanLayout({ threads, center: [100, 100] });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new FruchtermanLayout({ center: [100, 100] });
- * const positions = await layout.execute(graph, { center: [100, 100] }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { center: [100, 100] });
+ * <zh/> Fruchterman 力导向布局（WASM 版）
+ * 
+ * <en/> Fruchterman force-directed layout(WASM)
  */
 export class FruchtermanLayout implements Layout<WASMFruchtermanLayoutOptions> {
   id = 'fruchtermanWASM';

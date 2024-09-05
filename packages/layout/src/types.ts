@@ -161,28 +161,28 @@ export interface CircularLayoutOptions {
    * <zh/> 若设置了 radius，则 startRadius 与 endRadius 不生效
    *
    * <en/> If radius is set, startRadius and endRadius will not take effect
-   * @defaultVaule null
+   * @defaultValue null
    */
   radius?: number | null;
   /**
    * <zh/> 螺旋状布局的起始半径
    *
    * <en/> Spiral layout start radius
-   * @defaultVaule null
+   * @defaultValue null
    */
   startRadius?: number | null;
   /**
    * <zh/> 螺旋状布局的结束半径
    *
    * <en/> Spiral layout end radius
-   * @defaultVaule null
+   * @defaultValue null
    */
   endRadius?: number | null;
   /**
    * <zh/> 是否顺时针排列
    *
    * <en/> Whether to arrange clockwise
-   * @defaultVaule true
+   * @defaultValue true
    */
   clockwise?: boolean;
   /**
@@ -193,7 +193,7 @@ export interface CircularLayoutOptions {
    * <zh/> 在 endRadius - startRadius != 0 时生效
    *
    * <en/> It takes effect when endRadius - startRadius != 0
-   * @defaultVaule 1
+   * @defaultValue 1
    */
   divisions?: number;
   /**
@@ -207,14 +207,14 @@ export interface CircularLayoutOptions {
    * - 'topology': Sort according to topological order
    * - 'topology-directed': Sort according to topological order (directed graph)
    * - 'degree': Sort according to degree size
-   * @defaultVaule null
+   * @defaultValue null
    */
   ordering?: 'topology' | 'topology-directed' | 'degree' | null;
   /**
    * <zh/> 从第一个节点到最后节点之间相隔多少个 2*PI
    *
    * <en/> The distance between the first node and the last node is separated by how many 2*PI
-   * @defaultVaule 1
+   * @defaultValue 1
    */
   angleRatio?: number;
   /**
@@ -252,7 +252,7 @@ export interface GridLayoutOptions {
    * <zh/> 在 G6 中使用当前容器的宽度作为 grid 布局 width 的默认值。单独使用此布局时默认值为 300
    *
    * <en/> The width of the grid layout is the default value of the current container width in G6. The default value is 300 when this layout is used alone
-   * @defaultVaule 300
+   * @defaultValue 300
    */
   width?: number;
   /**
@@ -263,14 +263,14 @@ export interface GridLayoutOptions {
    * <zh/> 在 G6 中使用当前容器的高度作为 grid 布局 height 的默认值。单独使用此布局时默认值为 300
    *
    * <en/> The height of the grid layout is the default value of the current container height in G6. The default value is 300 when this layout is used alone
-   * @defaultVaule 300
+   * @defaultValue 300
    */
   height?: number;
   /**
    * <zh/> 网格开始位置（左上角）
    *
    * <en/> Grid layout starting position (upper left corner)
-   * @defaultVaule [0, 0]
+   * @defaultValue [0, 0]
    *
    */
   begin?: PointTuple;
@@ -282,7 +282,7 @@ export interface GridLayoutOptions {
    * <zh/> 必须配合下面属性 nodeSize 或节点数据中的 data.size 属性，只有在数据中设置了 data.size 或在该布局中配置了与当前图节点大小相同的 nodeSize 值，才能够进行节点重叠的碰撞检测
    *
    * <en/> Must be used with the following properties: nodeSize or data.size in the data. When data.size is set or nodeSize is configured with the same value as the current graph node size in the layout, the collision detection of node overlap can be performed
-   * @defaultVaule false
+   * @defaultValue false
    */
   preventOverlap?: boolean;
   /**
@@ -295,42 +295,42 @@ export interface GridLayoutOptions {
    * <zh/> 避免重叠时节点的间距 padding。preventOverlap 为 true 时生效
    *
    * <en/> Padding between nodes to prevent overlap. It takes effect when preventOverlap is true
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   preventOverlapPadding?: number;
   /**
    * <zh/> 为 false 时表示利用所有可用画布空间，为 true 时表示利用最小的画布空间
    *
    * <en/> When false, it means to use all available canvas space. When true, it means to use the smallest canvas space
-   * @defaultVaule false
+   * @defaultValue false
    */
   condense?: boolean;
   /**
    * <zh/> 网格的行数，为 undefined 时算法根据节点数量、布局空间、cols（若指定）自动计算
    *
    * <en/> Number of rows in the grid. It is calculated automatically when it is undefined and the number of nodes, layout space, and cols (if specified) are specified
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   rows?: number;
   /**
    * <zh/> 网格的列数，为 undefined 时算法根据节点数量、布局空间、rows（若指定）自动计算
    *
    * <en/> Number of columns in the grid. It is calculated automatically when it is undefined and the number of nodes, layout space, and rows (if specified) are specified
-   * @defaultVaule undefined
+   * @defaultValue undefined
    */
   cols?: number;
   /**
    * <zh/> 指定排序的依据（节点属性名），数值越高则该节点被放置得越中心。若为 undefined，则会计算节点的度数，度数越高，节点将被放置得越中心
    *
    * <en/> Specify the basis for sorting (node attribute name). The higher the value, the more the node will be placed in the center. If it is undefined, the degree of the node will be calculated, and the higher the degree, the more the node will be placed in the center
-   * @defaultVaule undefined
+   * @defaultValue undefined
    */
   sortBy?: string;
   /**
    * <zh/> 指定每个节点所在的行和列
    *
    * <en/> Specify the row and column where each node is located
-   * @defaultVaule undefined
+   * @defaultValue undefined
    */
   position?: (node?: Node) => { row?: number; col?: number };
   /**
@@ -383,7 +383,7 @@ export interface MDSLayoutOptions {
    * <zh/> 边的理想长度，可以理解为边作为弹簧在不受力下的长度
    *
    * <en/> Ideal length of the edge, which can be understood as the length of the edge as a spring under no force
-   * @defaultVaule 200
+   * @defaultValue 200
    */
   linkDistance?: number;
 }
@@ -408,7 +408,7 @@ export interface ConcentricLayoutOptions {
    * <zh/> 必须配合下面属性 nodeSize 或节点数据中的 data.size 属性，只有在数据中设置了 data.size 或在该布局中配置了与当前图节点大小相同的 nodeSize 值，才能够进行节点重叠的碰撞检测
    *
    * <en/> Must be used with the following properties, and only when the data.size property is set in the data or the nodeSize value configured with the same size as the current graph node is configured in the layout, can the node overlap collision detection be performed
-   * @defaultVaule false
+   * @defaultValue false
    */
   preventOverlap?: boolean;
   /**
@@ -425,28 +425,28 @@ export interface ConcentricLayoutOptions {
    * <zh/> 若为 undefined ，则将会被设置为 2 * Math.PI * (1 - 1 / |level.nodes|) ，其中 level.nodes 为该算法计算出的每一层的节点，|level.nodes| 代表该层节点数量
    *
    * <en/> If undefined, it will be set to 2 * Math.PI * (1 - 1 / |level.nodes|), where level.nodes is the number of nodes in each layer calculated by this algorithm, and |level.nodes| represents the number of nodes in this layer
-   * @defaultVaule undefined
+   * @defaultValue undefined
    */
   sweep?: number;
   /**
    * <zh/> 环与环之间的距离是否相等
    *
    * <en/> Whether the distance between rings is equal
-   * @defaultVaule false
+   * @defaultValue false
    */
   equidistant?: boolean;
   /**
    * <zh/> 开始布局节点的弧度
    *
    * <en/> The starting angle of the layout node
-   * @defaultVaule 3 / 2 * Math.PI
+   * @defaultValue 3 / 2 * Math.PI
    */
   startAngle?: number;
   /**
    * <zh/> 是否按照顺时针排列
    *
    * <en/> Whether to arrange in clockwise order
-   * @defaultVaule false
+   * @defaultValue false
    */
   clockwise?: boolean;
   /**
@@ -457,7 +457,7 @@ export interface ConcentricLayoutOptions {
    * <zh/> 若为 undefined，则将会被设置为 maxValue / 4 ，其中 maxValue 为最大的排序依据的属性值。例如，若 sortBy 为 'degree'，则 maxValue 为所有节点中度数最大的节点的度数
    *
    * <en/> If undefined, it will be set to maxValue / 4, where maxValue is the largest value of the sortBy attribute. For example, if sortBy is 'degree', maxValue is the degree of the node with the largest degree in all nodes
-   * @defaultVaule undefined
+   * @defaultValue undefined
    */
   maxLevelDiff?: number;
   /**
@@ -468,7 +468,7 @@ export interface ConcentricLayoutOptions {
    * <zh/> 数值越高则该节点被放置得越中心。若为 undefined，则会计算节点的度数，度数越高，节点将被放置得越中心
    *
    * <en/> The higher the value, the more the node will be placed in the center. If undefined, the degree of the node will be calculated, and the higher the degree, the more the node will be placed in the center
-   * @defaultVaule undefined
+   * @defaultValue undefined
    */
   sortBy?: string;
   /**
@@ -487,7 +487,7 @@ export interface ConcentricLayoutOptions {
    * <zh/> 环与环之间最小间距，用于调整半径
    *
    * <en/> Minimum spacing between rings, used to adjust the radius
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   nodeSpacing?: number | number[] | ((node?: Node) => number);
 }
@@ -520,14 +520,14 @@ export interface RadialLayoutOptions {
    * <zh/> 边长度
    *
    * <en/> Edge length
-   * @defaultVaule 50
+   * @defaultValue 50
    */
   linkDistance?: number;
   /**
    * <zh/> 停止迭代到最大迭代数
    *
    * <en/> Stop iterating until the maximum iteration number is reached
-   * @defaultVaule 1000
+   * @defaultValue 1000
    */
   maxIteration?: number;
   /**
@@ -545,7 +545,7 @@ export interface RadialLayoutOptions {
    * <zh/> 每一圈距离上一圈的距离。默认填充整个画布，即根据图的大小决定
    *
    * <en/> The distance between each ring. Defaults to filling the entire canvas, i.e., determined by the size of the graph
-   * @defaultVaule 100
+   * @defaultValue 100
    */
   unitRadius?: number | null;
   /**
@@ -556,7 +556,7 @@ export interface RadialLayoutOptions {
    * <zh/> 必须配合下面属性 nodeSize 或节点数据中的 data.size 属性，只有在数据中设置了 data.size 或在该布局中配置了与当前图节点大小相同的 nodeSize 值，才能够进行节点重叠的碰撞检测
    *
    * <en/> Must be used with the following properties: nodeSize or data.size in the node data. Only when data.size or nodeSize with the same value as the current graph node size is set in the layout configuration, can the collision detection of node overlap be performed
-   * @defaultVaule false
+   * @defaultValue false
    */
   preventOverlap?: boolean;
   /**
@@ -569,14 +569,14 @@ export interface RadialLayoutOptions {
    * <zh/> preventOverlap 为 true 时生效, 防止重叠时节点边缘间距的最小值。可以是回调函数, 为不同节点设置不同的最小间距
    *
    * <en/> Effective when preventOverlap is true. The minimum edge spacing when preventing node overlap. It can be a callback function, and set different minimum spacing for different nodes
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   nodeSpacing?: number | Function;
   /**
    * <zh/> 防止重叠步骤的最大迭代次数
    *
    * <en/> Maximum iteration number of the prevent overlap step
-   * @defaultVaule 200
+   * @defaultValue 200
    */
   maxPreventOverlapIteration?: number;
   /**
@@ -587,7 +587,7 @@ export interface RadialLayoutOptions {
    * <zh/> 当 preventOverlap 为 true，且 strictRadial 为 false 时，有重叠的节点严格沿着所在的环展开，但在一个环上若节点过多，可能无法完全避免节点重叠 当 preventOverlap 为 true，且 strictRadial 为 true 时，允许同环上重叠的节点不严格沿着该环布局，可以在该环的前后偏移以避免重叠
    *
    * <en/> When preventOverlap is true and strictRadial is false, overlapping nodes are strictly laid out along the ring they are in. However, if there are too many nodes on a ring, it may not be possible to completely avoid node overlap. When preventOverlap is true and strictRadial is true, overlapping nodes on the same ring are allowed to be laid out not strictly along the ring, and can be offset before and after the ring to avoid overlap
-   * @defaultVaule true
+   * @defaultValue true
    */
   strictRadial?: boolean;
   /**
@@ -598,14 +598,14 @@ export interface RadialLayoutOptions {
    * <zh/> 默认 undefined ，表示根据数据的拓扑结构（节点间最短路径）排布，即关系越近/点对间最短路径越小的节点将会被尽可能排列在一起；'data' 表示按照节点在数据中的顺序排列，即在数据顺序上靠近的节点将会尽可能排列在一起；也可以指定为节点数据中的某个字段名，例如 'cluster'、'name' 等（必须在数据的 data 中存在）
    *
    * <en/> The default is undefined, which means arranging based on the topological structure of the data (the shortest path between nodes). Nodes that are closer in proximity or have a smaller shortest path between them will be arranged as close together as possible. 'data' indicates arranging based on the order of nodes in the data, so nodes that are closer in the data order will be arranged as close together as possible. You can also specify a field name in the node data, such as 'cluster' or 'name' (it must exist in the data of the graph)
-   * @defaultVaule undefined
+   * @defaultValue undefined
    */
   sortBy?: string;
   /**
    * <zh/> 同层节点根据 sortBy 排列的强度，数值越大，sortBy 指定的方式计算出距离越小的越靠近。sortBy 不为 undefined 时生效
    *
    * <en/> The strength of arranging nodes according to sortBy. The larger the value, the closer the nodes that sortBy specifies are arranged. It takes effect when sortBy is not undefined
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   sortStrength?: number;
 }
@@ -629,7 +629,7 @@ export interface D3ForceLayoutOptions {
    * <en/> Edge length
    * - number: fixed edge length
    * - (edge: Edge) => number: edge length callback function, set different edge lengths according to different edges
-   * @defaultVaule 50
+   * @defaultValue 50
    */
   linkDistance?: number | ((edge?: Edge) => number);
   /**
@@ -648,7 +648,7 @@ export interface D3ForceLayoutOptions {
    * <en/> Cluster node strength. Negative numbers represent repulsion
    * - number: fixed cluster node strength
    * - (node: Node) => number: cluster node strength callback function, set different cluster node strengths according to different nodes
-   * @defaultVaule -1
+   * @defaultValue -1
    */
   nodeStrength?: number | ((node?: Node) => number);
   /**
@@ -659,14 +659,14 @@ export interface D3ForceLayoutOptions {
    * <zh/> 必须配合下面属性 nodeSize 或节点数据中的 data.size 属性，只有在数据中设置了 data.size 或在该布局中配置了与当前图节点大小相同的 nodeSize 值，才能够进行节点重叠的碰撞检测
    *
    * <en/> Must be used with the following properties: nodeSize or data.size in the node data. Only when data.size or nodeSize with the same value as the current graph node size is set in the layout configuration, can the collision detection of node overlapping be performed
-   * @defaultVaule false
+   * @defaultValue false
    */
   preventOverlap?: boolean;
   /**
    * <zh/> 防止重叠的力强度，范围 [0, 1]
    *
    * <en/> The force strength of preventing overlap, the range is [0, 1]
-   * @defaultVaule 1
+   * @defaultValue 1
    */
   collideStrength?: number;
   /**
@@ -685,63 +685,63 @@ export interface D3ForceLayoutOptions {
    * <zh/> 当前的迭代收敛阈值
    *
    * <en/> The convergence threshold of the current iteration
-   * @defaultVaule 0.3
+   * @defaultValue 0.3
    */
   alpha?: number;
   /**
    * <zh/> 迭代阈值的衰减率。范围 [0, 1]。0.028 对应迭代数为 300
    *
    * <en/> The decay rate of the iteration threshold. The range is [0, 1]. 0.028 corresponds to iteration number 300
-   * @defaultVaule 0.028
+   * @defaultValue 0.028
    */
   alphaDecay?: number;
   /**
    * <zh/> 停止迭代的阈值
    *
    * <en/> The threshold to stop iteration
-   * @defaultVaule 0.001
+   * @defaultValue 0.001
    */
   alphaMin?: number;
   /**
    * <zh/> 是否按照聚类信息布局
    *
    * <en/> Whether to layout according to the clustering information
-   * @defaultVaule false
+   * @defaultValue false
    */
   clustering?: boolean;
   /**
    * <zh/> 聚类节点作用力。负数代表斥力
    *
    * <en/> Clustering node force. Negative numbers represent repulsion
-   * @defaultVaule -1
+   * @defaultValue -1
    */
   clusterNodeStrength?: number;
   /**
    * <zh/> 聚类边作用力
    *
    * <en/> Clustering edge force
-   * @defaultVaule 0.1
+   * @defaultValue 0.1
    */
   clusterEdgeStrength?: number;
   /**
    * <zh/> 聚类边长度
    *
    * <en/> Clustering edge length
-   * @defaultVaule 100
+   * @defaultValue 100
    */
   clusterEdgeDistance?: number;
   /**
    * <zh/> 聚类节点大小 / 直径，直径越大，越分散
    *
    * <en/> Clustering node size / diameter. Diameter larger means more scattered
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   clusterNodeSize?: number;
   /**
    * <zh/> 用于 foci 的力
    *
    * <en/> Force for foci
-   * @defaultVaule 0.8
+   * @defaultValue 0.8
    */
   clusterFociStrength?: number;
   /**
@@ -772,7 +772,7 @@ export interface CentripetalOptions {
    * <en/> The centripetal force of the leaf node (i.e., the node with degree 1)
    * - number: fixed centripetal force size
    * - ((node: Node, nodes: Node[], edges: Edge[]) => number): return different values according to the node, edge, and situation
-   * @defaultVaule 2
+   * @defaultValue 2
    */
   leaf?: number | ((node: Node, nodes: Node[], edges: Edge[]) => number);
   /**
@@ -782,7 +782,7 @@ export interface CentripetalOptions {
    * <en/> The centripetal force of the scattered node (i.e., the node with degree 0)
    * - number: fixed centripetal force size
    * - ((node: Node) => number): return different values according to the node situation
-   * @defaultVaule 2
+   * @defaultValue 2
    */
   single?: number | ((node: Node) => number);
   /**
@@ -792,7 +792,7 @@ export interface CentripetalOptions {
    * <en/> The centripetal force of the other nodes (i.e., the node with degree > 1)
    * - number: fixed centripetal force size
    * - ((node: Node) => number): return different values according to the node situation
-   * @defaultVaule 1
+   * @defaultValue 1
    */
   others?: number | ((node: Node) => number);
   /**
@@ -834,7 +834,7 @@ export interface ComboCombinedLayoutOptions {
    * <zh/> 若不指定，则根据传入的节点的 size 属性计算。若即不指定，节点中也没有 size，则默认大小为 10
    *
    * <en/> If not specified, it will be calculated based on the size attribute of the incoming node. If neither is specified, the default size is 10
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   nodeSize?: number | number[] | ((d?: Node) => number);
   /**
@@ -860,7 +860,7 @@ export interface ComboCombinedLayoutOptions {
    *   }
    *  });
    * ```
-   * @defaultVaule ForceLayout
+   * @defaultValue ForceLayout
    */
   outerLayout?: Layout<any>;
   /**
@@ -875,14 +875,14 @@ export interface ComboCombinedLayoutOptions {
    *  sortBy: 'id'
    *  });
    * ```
-   * @defaultVaule ConcentricLayout
+   * @defaultValue ConcentricLayout
    */
   innerLayout?: Layout<any>;
   /**
    * <zh/>  Combo 内部的 padding 值，不用于渲染，仅用于计算力。推荐设置为与视图上 combo 内部 padding 值相同的值
    *
    * <en/> The padding value inside the combo, which is not used for rendering, but only for calculating force. It is recommended to set it to the same value as the combo internal padding value on the view
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   comboPadding?: ((d?: unknown) => number) | number | number[] | undefined;
   /**
@@ -903,7 +903,7 @@ interface CommonForceLayoutOptions {
    * <zh/> 布局的维度，2D 渲染时指定为 2；若为 3D 渲染可指定为 3，则将多计算 z 轴的布局
    *
    * <en/> The dimensions of the layout, specify 2 for 2D rendering; if it is 3D rendering, specify 3 to calculate the layout of the z axis
-   * @defaultVaule 2
+   * @defaultValue 2
    */
   dimensions?: number;
   /**
@@ -916,14 +916,14 @@ interface CommonForceLayoutOptions {
    * <zh/> 当一次迭代的平均/最大/最小（根据distanceThresholdMode决定）移动长度小于该值时停止迭代。数字越小，布局越收敛，所用时间将越长
    *
    * <en/> When the average/max/min (depending on distanceThresholdMode) movement length of one iteration is less than this value, the iteration will stop. The smaller the number, the more converged the layout, and the longer the time it takes to use
-   * @defaultVaule 0.4
+   * @defaultValue 0.4
    */
   minMovement?: number;
   /**
    * <zh/> 最大迭代次数，若为 0 则将自动调整
    *
    * <en/> Maximum number of iterations, if it is 0, it will be automatically adjusted
-   * @defaultVaule 0
+   * @defaultValue 0
    */
   maxIteration?: number;
   /**
@@ -935,7 +935,7 @@ interface CommonForceLayoutOptions {
    * - 'mean': The average movement distance is less than minMovement when stopped iterating
    * - 'max': The maximum movement distance is less than minMovement when stopped iterating
    * - 'min': The minimum movement distance is less than minMovement when stopped iterating
-   * @defaultVaule 'mean'
+   * @defaultValue 'mean'
    */
   distanceThresholdMode?: 'mean' | 'max' | 'min';
   /**
@@ -966,28 +966,28 @@ export interface ForceLayoutOptions extends CommonForceLayoutOptions {
    * <en/> The length of the edge
    * - number: fixed length
    * - ((edge?: Edge, source?: any, target?: any) => number): return length according to the edge information
-   * @defaultVaule 200
+   * @defaultValue 200
    */
   linkDistance?: number | ((edge?: Edge, source?: any, target?: any) => number);
   /**
    * <zh/> 节点作用力，正数代表节点之间的引力作用，负数代表节点之间的斥力作用
    *
    * <en/> The force of the node, positive numbers represent the attraction force between nodes, and negative numbers represent the repulsion force between nodes
-   * @defaultVaule 1000
+   * @defaultValue 1000
    */
   nodeStrength?: number | ((d?: Node) => number);
   /**
    * <zh/> 边的作用力（引力）大小
    *
    * <en/> The size of the force of the edge (attraction)
-   * @defaultVaule 50
+   * @defaultValue 50
    */
   edgeStrength?: number | ((d?: Edge) => number);
   /**
    * <zh/> 是否防止重叠，必须配合下面属性 nodeSize 或节点数据中的 data.size 属性，只有在数据中设置了 data.size 或在该布局中配置了与当前图节点大小相同的 nodeSize 值，才能够进行节点重叠的碰撞检测
    *
    * <en/> Whether to prevent overlap, must be used with the following properties nodeSize or data.size in the node data, and only when the data.size is set in the data or the nodeSize value is configured with the same value as the current graph node size in the layout configuration, can the node overlap collision detection be performed
-   * @defaultVaule true
+   * @defaultValue true
    */
   preventOverlap?: boolean;
   /**
@@ -1006,42 +1006,42 @@ export interface ForceLayoutOptions extends CommonForceLayoutOptions {
    * <zh/> 阻尼系数，取值范围 [0, 1]。数字越大，速度降低得越慢
    *
    * <en/> Damping coefficient, the range of the value is [0, 1]. The larger the number, the slower the speed will decrease
-   * @defaultVaule 0.9
+   * @defaultValue 0.9
    */
   damping?: number;
   /**
    * <zh/> 一次迭代的最大移动长度
    *
    * <en/> The maximum movement length of one iteration
-   * @defaultVaule 200
+   * @defaultValue 200
    */
   maxSpeed?: number;
   /**
    * <zh/> 库伦系数，斥力的一个系数，数字越大，节点之间的斥力越大
    *
    * <en/> Coulomb's coefficient, a coefficient of repulsion, the larger the number, the larger the repulsion between nodes
-   * @defaultVaule 0.005
+   * @defaultValue 0.005
    */
   coulombDisScale?: number;
   /**
    * <zh/> 中心力大小，指所有节点被吸引到 center 的力。数字越大，布局越紧凑
    *
    * <en/> The size of the center force, which attracts all nodes to the center. The larger the number, the more compact the layout
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   gravity?: number;
   /**
    * <zh/> 斥力系数，数值越大，斥力越大
    *
    * <en/> The repulsion coefficient, the larger the number, the larger the repulsion
-   * @defaultVaule 1
+   * @defaultValue 1
    */
   factor?: number;
   /**
    * <zh/> 控制每个迭代节点的移动速度
    *
    * <en/> Control the movement speed of each iteration node
-   * @defaultVaule 0.02
+   * @defaultValue 0.02
    */
   interval?: number;
   /**
@@ -1058,7 +1058,7 @@ export interface ForceLayoutOptions extends CommonForceLayoutOptions {
    * <zh/> 若为 true，则 centripetalOptions.single 将为 100；centripetalOptions.leaf 将使用 getClusterNodeStrength 返回值；getClusterNodeStrength.center 将为叶子节点返回当前所有叶子节点的平均中心
    *
    * <en/> If it is true, centripetalOptions.single will be 100; centripetalOptions.leaf will use the return value of getClusterNodeStrength; getClusterNodeStrength.center will be the average center of all leaf nodes
-   * @defaultVaule false
+   * @defaultValue false
    */
   leafCluster?: boolean;
   /**
@@ -1069,7 +1069,7 @@ export interface ForceLayoutOptions extends CommonForceLayoutOptions {
    * <zh/> 若为 true，将使用 nodeClusterBy 配置的节点数据中的字段作为聚类依据。 centripetalOptions.single、centripetalOptions.leaf、centripetalOptions.others 将使用 getClusterNodeStrength 返回值；leaf、centripetalOptions.center 将使用当前节点所属聚类中所有节点的平均中心
    *
    * <en/> If it is true, the node data configured by nodeClusterBy will be used as the clustering basis. centripetalOptions.single, centripetalOptions.leaf, centripetalOptions.others will use the return value of getClusterNodeStrength; leaf、centripetalOptions.center will use the average center of all nodes in the current cluster
-   * @defaultVaule false
+   * @defaultValue false
    */
   clustering?: boolean;
   /**
@@ -1082,14 +1082,14 @@ export interface ForceLayoutOptions extends CommonForceLayoutOptions {
    * <zh/> 配合 clustering 和 nodeClusterBy 使用，指定聚类向心力的大小
    *
    * <en/> Use it with clustering and nodeClusterBy to specify the size of the centripetal force of the cluster
-   * @defaultVaule 20
+   * @defaultValue 20
    */
   clusterNodeStrength?: number | ((node: Node) => number);
   /**
    * <zh/> 防止重叠的力强度，范围 [0, 1]
    *
    * <en/> The strength of the force that prevents overlap, range [0, 1]
-   * @defaultVaule 1
+   * @defaultValue 1
    */
   collideStrength?: number;
   /**
@@ -1152,35 +1152,35 @@ export interface ForceAtlas2LayoutOptions extends CommonForceLayoutOptions {
    * <zh/> 斥力系数，可用于调整布局的紧凑程度。kr 越大，布局越松散
    *
    * <en/> The repulsive coefficient, which can be used to adjust the compactness of the layout. The larger kr is, the more relaxed the layout is
-   * @defaultVaule 5
+   * @defaultValue 5
    */
   kr?: number;
   /**
    * <zh/> 重力系数。kg 越大，布局越聚集在中心
    *
    * <en/> The gravitational coefficient. The larger kg is, the more clustered the layout is in the center
-   * @defaultVaule 1
+   * @defaultValue 1
    */
   kg?: number;
   /**
    * <zh/> 控制迭代过程中，节点移动的速度
    *
    * <en/> Control the speed of node movement during iteration
-   * @defaultVaule 0.1
+   * @defaultValue 0.1
    */
   ks?: number;
   /**
    * <zh/> 迭代过程中，最大的节点移动的速度上限
    *
    * <en/> The upper limit of the maximum node movement speed during iteration
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   ksmax?: number;
   /**
    * <zh/> 迭代接近收敛时停止震荡的容忍度
    *
    * <en/> The tolerance for stopping oscillation when iteration is close to convergence
-   * @defaultVaule 0.1
+   * @defaultValue 0.1
    */
   tao?: number;
   /**
@@ -1190,7 +1190,7 @@ export interface ForceAtlas2LayoutOptions extends CommonForceLayoutOptions {
    * <en/> Clustering mode, the clustering will be more compact in the 'linlog' mode
    * - 'normal'：normal mode
    * - 'linlog'：linlog mode
-   * @defaultVaule 'normal'
+   * @defaultValue 'normal'
    */
   mode?: 'normal' | 'linlog';
   /**
@@ -1201,14 +1201,14 @@ export interface ForceAtlas2LayoutOptions extends CommonForceLayoutOptions {
    * <zh/> 必须配合下面属性 nodeSize 或节点数据中的 data.size 属性，只有在数据中设置了 data.size 或在该布局中配置了与当前图节点大小相同的 nodeSize 值，才能够进行节点重叠的碰撞检测
    *
    * <en/> Must be used with the following properties: nodeSize or data.size in the node data. Only when data.size or nodeSize with the same value as the current graph node size is set in the layout configuration, can the collision detection of node overlap be performed
-   * @defaultVaule false
+   * @defaultValue false
    */
   preventOverlap?: boolean;
   /**
    * <zh/> 是否打开 hub 模式。若为 true，相比与出度大的节点，入度大的节点将会有更高的优先级被放置在中心位置
    *
    * <en/> Whether to open the hub mode. If true, nodes with high out-degree will have higher priority than nodes with high in-degree to be placed in the center
-   * @defaultVaule false
+   * @defaultValue false
    */
   dissuadeHubs?: boolean;
   /**
@@ -1268,35 +1268,35 @@ export interface FruchtermanLayoutOptions extends CommonForceLayoutOptions {
    * <zh/> 中心力大小，指所有节点被吸引到 center 的力。数字越大，布局越紧凑
    *
    * <en/> The size of the center force, which means the force that all nodes are attracted to the center. The larger the number, the more compact the layout
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   gravity?: number;
   /**
    * <zh/> 每次迭代节点移动的速度。速度太快可能会导致强烈震荡
    *
    * <en/> The speed at which the node moves in each iteration. A speed that is too fast may cause strong oscillations
-   * @defaultVaule 5
+   * @defaultValue 5
    */
   speed?: number;
   /**
    * <zh/> 是否按照聚类布局
    *
    * <en/> Whether to layout according to clustering
-   * @defaultVaule false
+   * @defaultValue false
    */
   clustering?: boolean;
   /**
    * <zh/> 聚类内部的重力大小，影响聚类的紧凑程度，在 clustering 为 true 时生效
    *
    * <en/> The size of the gravity inside the cluster, which affects the compactness of the cluster, and it takes effect when clustering is true
-   * @defaultVaule 10
+   * @defaultValue 10
    */
   clusterGravity?: number;
   /**
    * <zh/> 聚类布局依据的节点数据 data 中的字段名，cluster: true 时使用
    *
    * <en/> The field name of the node data data in the data, which is used when cluster is true
-   * @defaultVaule 'cluster'
+   * @defaultValue 'cluster'
    */
   nodeClusterBy?: string;
   /**

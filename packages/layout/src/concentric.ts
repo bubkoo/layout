@@ -25,19 +25,9 @@ const DEFAULTS_LAYOUT_OPTIONS: Partial<ConcentricLayoutOptions> = {
 };
 
 /**
- * Layout arranging the nodes in concentrics
- *
- * @example
- * // Assign layout options when initialization.
- * const layout = new ConcentricLayout({ nodeSpacing: 10 });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new ConcentricLayout({ nodeSpacing: 10});
- * const positions = await layout.execute(graph, { nodeSpacing: 10 }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { nodeSpacing: 10 });
+ * <zh/> 同心圆布局
+ * 
+ * <en/> Concentric layout
  */
 export class ConcentricLayout implements Layout<ConcentricLayoutOptions> {
   id = 'concentric';

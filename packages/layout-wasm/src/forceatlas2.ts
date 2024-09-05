@@ -54,19 +54,9 @@ interface FormattedOptions extends WASMForceAtlas2LayoutOptions {
   speed: number;
 }
 /**
- * Layout nodes with force atlas 2 model
+ * <zh/> Atlas2 力导向布局（WASM 版）
  *
- * @example
- * // Assign layout options when initialization.
- * const layout = new ForceAtlas2Layout({ center: [100, 100] });
- * const positions = await layout.execute(graph); // { nodes: [], edges: [] }
- *
- * // Or use different options later.
- * const layout = new ForceAtlas2Layout({ center: [100, 100] });
- * const positions = await layout.execute(graph, { center: [100, 100] }); // { nodes: [], edges: [] }
- *
- * // If you want to assign the positions directly to the nodes, use assign method.
- * await layout.assign(graph, { center: [100, 100] });
+ * <en/> Force Atlas 2 layout(WASM)
  */
 export class ForceAtlas2Layout implements Layout<WASMForceAtlas2LayoutOptions> {
   id = 'forceAtlas2WASM';
@@ -90,7 +80,7 @@ export class ForceAtlas2Layout implements Layout<WASMForceAtlas2LayoutOptions> {
    * To directly assign the positions to the nodes.
    */
   async assign(graph: Graph, options?: ForceAtlas2LayoutOptions) {
-   await this.genericForceAtlas2Layout(true, graph, options);
+    await this.genericForceAtlas2Layout(true, graph, options);
   }
 
   private async genericForceAtlas2Layout(
