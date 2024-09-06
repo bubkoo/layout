@@ -1,6 +1,6 @@
 {
   "name": "@antv/layout-gpu",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "graph layout algorithm implemented with GPGPU",
   "license": "MIT",
   "repository": {
