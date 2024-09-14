@@ -7,5 +7,6 @@
     "nodesep",
     "rankdir",
     "ranksep"
-  ]
+  ],
+  "rust-analyzer.linkedProjects": ["./packages/layout-rust/Cargo.toml"]
 }
