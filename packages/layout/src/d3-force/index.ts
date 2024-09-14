@@ -144,8 +144,8 @@ export class D3ForceLayout<
 
     const nodes = graph.getAllNodes().map(({ id, data }) => ({
       id,
-      data,
-      ...pick(data, this.config.inputNodeAttrs),
+      ...data,
+      ...pick(data.data, this.config.inputNodeAttrs),
     }));
 
     const edges = graph.getAllEdges().map((edge) => ({ ...edge }));
