@@ -14,7 +14,7 @@ import type {
   Point,
   PointTuple,
 } from './types';
-import { cloneFormatData, formatNumberFn } from './util';
+import { cloneFormatData, formatNumberFn, formatSizeFn } from './util';
 import type { Size } from './util/size';
 import { parseSize } from './util/size';
 
@@ -289,14 +289,15 @@ export class AntVDagreLayout implements Layout<AntVDagreLayoutOptions> {
       horisep = ranksepfunc;
       vertisep = nodesepfunc;
     }
+
+    const nodeSizeFunc = formatSizeFn(10, nodeSize, false);
+
     // copy graph to g
     const nodes: Node[] = graph.getAllNodes();
     const edges: Edge[] = graph.getAllEdges();
 
     nodes.forEach((node) => {
-      const size = parseSize(
-        typeof nodeSize === 'function' ? nodeSize(node) : nodeSize,
-      );
+      const size = parseSize(nodeSizeFunc(node));
       const verti = vertisep(node);
       const hori = horisep(node);
       const width = size[0] + 2 * hori;
