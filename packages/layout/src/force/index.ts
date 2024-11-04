@@ -1,5 +1,5 @@
 import { Graph as IGraph } from '@antv/graphlib';
-import { isFunction, isNumber, isObject } from '@antv/util';
+import { isNumber } from '@antv/util';
 import type {
   Edge,
   ForceLayoutOptions,
@@ -11,7 +11,7 @@ import type {
   OutNode,
   Point,
 } from '../types';
-import { formatNumberFn, isArray } from '../util';
+import { formatNodeSizeToNumber, formatNumberFn } from '../util';
 import { forceNBody } from './force-n-body';
 import {
   CalcEdge,
@@ -42,7 +42,7 @@ const DEFAULTS_LAYOUT_OPTIONS: Partial<ForceLayoutOptions> = {
 
 /**
  * <zh/> 力导向布局
- * 
+ *
  * <en/> Force-directed layout
  */
 export class ForceLayout implements LayoutWithIterations<ForceLayoutOptions> {
@@ -85,7 +85,7 @@ export class ForceLayout implements LayoutWithIterations<ForceLayoutOptions> {
    * To directly assign the positions to the nodes.
    */
   async assign(graph: Graph, options?: ForceLayoutOptions) {
-   await this.genericForceLayout(true, graph, options);
+    await this.genericForceLayout(true, graph, options);
   }
 
   /**
@@ -292,12 +292,7 @@ export class ForceLayout implements LayoutWithIterations<ForceLayoutOptions> {
     graph: Graph,
   ): FormatedOptions {
     const formattedOptions = { ...options } as FormatedOptions;
-    const {
-      width: propsWidth,
-      height: propsHeight,
-      getMass,
-      nodeSize,
-    } = options;
+    const { width: propsWidth, height: propsHeight, getMass } = options;
 
     // === formating width, height, and center =====
     formattedOptions.width =
@@ -326,34 +321,10 @@ export class ForceLayout implements LayoutWithIterations<ForceLayoutOptions> {
     }
 
     // === formating node size =====
-
-    const nodeSpacingFunc = formatNumberFn<Node>(0, options.nodeSpacing);
-    let nodeSizeFn;
-    if (!nodeSize) {
-      nodeSizeFn = (d?: Node) => {
-        const { size } = d?.data || {};
-        if (size) {
-          if (isArray(size)) {
-            return Math.max(size[0], size[1]) + nodeSpacingFunc(d);
-          }
-          if (isObject<{ width: number; height: number }>(size)) {
-            return Math.max(size.width, size.height) + nodeSpacingFunc(d);
-          }
-          return (size as number) + nodeSpacingFunc(d);
-        }
-        return 10 + nodeSpacingFunc(d);
-      };
-    } else if (isFunction(nodeSize)) {
-      nodeSizeFn = (d?: Node) => (nodeSize as Function)(d) + nodeSpacingFunc(d);
-    } else if (isArray(nodeSize)) {
-      nodeSizeFn = (d?: Node) => {
-        const nodeSizeArr = nodeSize as [number, number];
-        return Math.max(nodeSizeArr[0], nodeSizeArr[1]) + nodeSpacingFunc(d);
-      };
-    } else {
-      nodeSizeFn = (d?: Node) => (nodeSize as number) + nodeSpacingFunc(d);
-    }
-    formattedOptions.nodeSize = nodeSizeFn;
+    formattedOptions.nodeSize = formatNodeSizeToNumber(
+      options.nodeSize,
+      options.nodeSpacing,
+    );
 
     // === formating node / edge strengths =====
     const linkDistanceFn = options.linkDistance
