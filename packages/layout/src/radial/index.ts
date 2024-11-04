@@ -13,7 +13,7 @@ import type {
 import {
   cloneFormatData,
   floydWarshall,
-  formatNodeSize,
+  formatNodeSizeToNumber,
   getAdjMatrix,
   getEuclideanDistance,
 } from '../util';
@@ -37,7 +37,7 @@ const DEFAULTS_LAYOUT_OPTIONS: Partial<RadialLayoutOptions> = {
 
 /**
  * <zh/> 径向布局
- * 
+ *
  * <en/> Radial layout
  */
 export class RadialLayout implements Layout<RadialLayoutOptions> {
@@ -193,7 +193,7 @@ export class RadialLayout implements Layout<RadialLayoutOptions> {
     let nodeSizeFunc;
     // stagger the overlapped nodes
     if (preventOverlap) {
-      nodeSizeFunc = formatNodeSize(nodeSize, nodeSpacing);
+      nodeSizeFunc = formatNodeSizeToNumber(nodeSize, nodeSpacing);
       const nonoverlapForceParams: RadialNonoverlapForceOptions = {
         nodes,
         nodeSizeFunc,

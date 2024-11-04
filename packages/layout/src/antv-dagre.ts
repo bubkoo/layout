@@ -14,7 +14,9 @@ import type {
   Point,
   PointTuple,
 } from './types';
-import { cloneFormatData, formatNodeSize, formatNumberFn } from './util';
+import { cloneFormatData, formatNumberFn, formatSizeFn } from './util';
+import type { Size } from './util/size';
+import { parseSize } from './util/size';
 
 /**
  * <zh/> 层次/流程图布局的配置项
@@ -75,7 +77,7 @@ export interface AntVDagreLayoutOptions {
    * <en/> Used for collision detection when nodes overlap
    * @defaultValue undefined
    */
-  nodeSize?: number | number[] | ((nodeData: Node) => number);
+  nodeSize?: Size | ((nodeData: Node) => Size);
   /**
    * <zh/> 节点间距（px）
    *
@@ -275,7 +277,6 @@ export class AntVDagreLayout implements Layout<AntVDagreLayoutOptions> {
       // focusNode,
       preset,
     } = mergedOptions;
-
     const g = new Graph<NodeData, EdgeData>({
       tree: [],
     });
@@ -288,21 +289,19 @@ export class AntVDagreLayout implements Layout<AntVDagreLayoutOptions> {
       horisep = ranksepfunc;
       vertisep = nodesepfunc;
     }
-    const nodeSizeFunc = formatNodeSize(nodeSize, undefined);
+
+    const nodeSizeFunc = formatSizeFn(10, nodeSize, false);
 
     // copy graph to g
     const nodes: Node[] = graph.getAllNodes();
     const edges: Edge[] = graph.getAllEdges();
 
     nodes.forEach((node) => {
-      const size = nodeSizeFunc(node);
+      const size = parseSize(nodeSizeFunc(node));
       const verti = vertisep(node);
       const hori = horisep(node);
-      // FIXME: support 2 dimensions?
-      // const width = size[0] + 2 * hori;
-      // const height = size[1] + 2 * verti;
-      const width = size + 2 * hori;
-      const height = size + 2 * verti;
+      const width = size[0] + 2 * hori;
+      const height = size[1] + 2 * verti;
       const layer = node.data.layer;
       if (isNumber(layer)) {
         // 如果有layer属性，加入到node的label中

@@ -1,4 +1,5 @@
 import { Edge as IEdge, Graph as IGraph, Node as INode } from '@antv/graphlib';
+import type { Size } from './util/size';
 
 /**
  * <zh/> 节点数据
@@ -240,7 +241,7 @@ export interface CircularLayoutOptions {
    *
    * <en/> Node size (diameter). Used for collision detection when nodes overlap
    */
-  nodeSize?: number | number[] | ((nodeData: Node) => number);
+  nodeSize?: Size | ((nodeData: Node) => Size);
 }
 
 export interface GridLayoutOptions {
@@ -290,7 +291,7 @@ export interface GridLayoutOptions {
    *
    * <en/> Node size (diameter). Used for collision detection when nodes overlap
    */
-  nodeSize?: number | number[] | ((nodeData: Node) => number);
+  nodeSize?: Size | ((nodeData: Node) => Size);
   /**
    * <zh/> 避免重叠时节点的间距 padding。preventOverlap 为 true 时生效
    *
@@ -416,7 +417,7 @@ export interface ConcentricLayoutOptions {
    *
    * <en/> Node size (diameter). Used for collision detection when preventing node overlap
    */
-  nodeSize?: number | PointTuple | ((nodeData: Node) => number);
+  nodeSize?: Size | ((nodeData: Node) => Size);
   /**
    * <zh/> 第一个节点与最后一个节点之间的弧度差
    *
@@ -564,14 +565,14 @@ export interface RadialLayoutOptions {
    *
    * <en/> Node size (diameter). Used for collision detection when preventing node overlap
    */
-  nodeSize?: number | number[] | ((nodeData: Node) => number);
+  nodeSize?: Size | ((nodeData: Node) => Size);
   /**
    * <zh/> preventOverlap 为 true 时生效, 防止重叠时节点边缘间距的最小值。可以是回调函数, 为不同节点设置不同的最小间距
    *
    * <en/> Effective when preventOverlap is true. The minimum edge spacing when preventing node overlap. It can be a callback function, and set different minimum spacing for different nodes
    * @defaultValue 10
    */
-  nodeSpacing?: number | Function;
+  nodeSpacing?: number | ((nodeData: Node) => number);
   /**
    * <zh/> 防止重叠步骤的最大迭代次数
    *
@@ -674,13 +675,13 @@ export interface D3ForceLayoutOptions {
    *
    * <en/> Node size (diameter). Used for collision detection when preventing node overlapping
    */
-  nodeSize?: number | number[] | ((node?: Node) => number);
+  nodeSize?: Size | ((node?: Node) => Size);
   /**
    * <zh/> preventOverlap 为 true 时生效, 防止重叠时节点边缘间距的最小值。可以是回调函数, 为不同节点设置不同的最小间距
    *
    * <en/> It takes effect when preventOverlap is true. The minimum spacing of the node edge when preventing node overlapping. It can be a callback function, and set different minimum spacing for different nodes
    */
-  nodeSpacing?: number | number[] | ((node?: Node) => number);
+  nodeSpacing?: number | ((node?: Node) => number);
   /**
    * <zh/> 当前的迭代收敛阈值
    *
@@ -850,7 +851,7 @@ export interface ComboCombinedLayoutOptions {
    * @example
    * ```ts
    * import { ForceLayout } from '@antv/layout';
-   * 
+   *
    * outerLayout: new ForceLayout({
    * gravity: 1,
    * factor: 2,
@@ -870,7 +871,7 @@ export interface ComboCombinedLayoutOptions {
    * @example
    * ```ts
    * import { ConcentricLayout } from '@antv/layout';
-   * 
+   *
    * innerLayout: new ConcentricLayout({
    *  sortBy: 'id'
    *  });
@@ -995,7 +996,7 @@ export interface ForceLayoutOptions extends CommonForceLayoutOptions {
    *
    * <en/> The size of the node (diameter). Used for collision detection when preventing node overlap
    */
-  nodeSize?: number | number[] | ((d?: Node) => number);
+  nodeSize?: Size | ((d?: Node) => Size);
   /**
    * <zh/> preventOverlap 为 true 时生效, 防止重叠时节点边缘间距的最小值。可以是回调函数, 为不同节点设置不同的最小间距
    *
@@ -1236,7 +1237,7 @@ export interface ForceAtlas2LayoutOptions extends CommonForceLayoutOptions {
    *
    * <en/> Node size (diameter). Used for collision detection when preventing node overlap
    */
-  nodeSize?: number | number[] | ((node?: Node) => number);
+  nodeSize?: Size | ((node?: Node) => Size);
   /**
    * <zh/> 每一次迭代的回调函数
    *

@@ -1,5 +1,6 @@
 import { isFunction, isNumber, isObject } from '@antv/util';
 import { Node } from '../types';
+import { parseSize, type Size } from './size';
 
 /**
  * Format value with multiple types into a function returns number.
@@ -34,49 +35,44 @@ export function formatNumberFn<T = unknown>(
 export function formatSizeFn<T extends Node>(
   defaultValue: number,
   value?:
-    | number
-    | number[]
+    | Size
     | { width: number; height: number }
-    | ((d?: T) => number)
+    | ((d?: T) => Size)
     | undefined,
   resultIsNumber: boolean = true,
-): (d: T) => number | number[] {
+): (d: T) => Size {
   if (!value && value !== 0) {
     return (d) => {
       const { size } = d.data || {};
       if (size) {
-        if (Array.isArray(size)) {
-          return size[0] > size[1] ? size[0] : size[1];
-        }
-        if (isObject<{ width: number; height: number }>(size)) {
-          return size.width > size.height ? size.width : size.height;
+        if (Array.isArray(size))
+          return resultIsNumber ? Math.max(...size) || defaultValue : size;
+        if (
+          isObject<{ width: number; height: number }>(size) &&
+          size.width &&
+          size.height
+        ) {
+          return resultIsNumber
+            ? Math.max(size.width, size.height) || defaultValue
+            : [size.width, size.height];
         }
         return size;
       }
       return defaultValue;
     };
   }
-  if (isFunction(value)) {
-    return value;
-  }
-  if (isNumber(value)) {
-    return () => value;
-  }
+  if (isFunction(value)) return value;
+  if (isNumber(value)) return () => value;
   if (Array.isArray(value)) {
     return () => {
-      if (resultIsNumber) {
-        const max = Math.max(...value);
-        return isNaN(max) ? defaultValue : max;
-      }
+      if (resultIsNumber) return Math.max(...value) || defaultValue;
       return value;
     };
   }
-  if (isObject(value)) {
+  if (isObject(value) && value.width && value.height) {
     return () => {
-      if (resultIsNumber) {
-        const max = Math.max(value.width, value.height);
-        return isNaN(max) ? defaultValue : max;
-      }
+      if (resultIsNumber)
+        return Math.max(value.width, value.height) || defaultValue;
       return [value.width, value.height];
     };
   }
@@ -89,50 +85,40 @@ export function formatSizeFn<T extends Node>(
  * @param nodeSpacing
  * @returns
  */
-export const formatNodeSize = (
-  nodeSize: number | number[] | ((nodeData: Node) => number) | undefined,
-  nodeSpacing: number | Function | undefined,
-): ((nodeData: Node) => number) => {
-  let nodeSizeFunc;
-  let nodeSpacingFunc: Function;
-  if (isNumber(nodeSpacing)) {
-    nodeSpacingFunc = () => nodeSpacing;
-  } else if (isFunction(nodeSpacing)) {
-    nodeSpacingFunc = nodeSpacing;
-  } else {
-    nodeSpacingFunc = () => 0;
-  }
+export const formatNodeSizeToNumber = (
+  nodeSize: Size | ((node: Node) => Size) | undefined,
+  nodeSpacing: number | ((node: Node) => number) | undefined,
+  defaultNodeSize: number = 10,
+): ((node: Node) => number) => {
+  let nodeSizeFunc: (node: Node) => Size;
+  const nodeSpacingFunc =
+    typeof nodeSpacing === 'function' ? nodeSpacing : () => nodeSpacing || 0;
 
   if (!nodeSize) {
     nodeSizeFunc = (d: Node) => {
-      if (d.data?.bboxSize) {
-        return (
-          Math.max(d.data.bboxSize[0], d.data.bboxSize[1]) + nodeSpacingFunc(d)
-        );
-      }
+      if (d.data?.bboxSize) return d.data?.bboxSize;
       if (d.data?.size) {
-        if (Array.isArray(d.data.size)) {
-          return Math.max(d.data.size[0], d.data.size[1]) + nodeSpacingFunc(d);
-        }
         const dataSize = d.data.size;
-        if (isObject<{ width: number; height: number }>(dataSize)) {
-          const res =
-            dataSize.width > dataSize.height ? dataSize.width : dataSize.height;
-          return res + nodeSpacingFunc(d);
-        }
-        return dataSize + nodeSpacingFunc(d);
+        if (Array.isArray(dataSize)) return dataSize;
+        if (isObject<{ width: number; height: number }>(dataSize))
+          return [dataSize.width, dataSize.height];
+        return dataSize;
       }
-      return 10 + nodeSpacingFunc(d);
+      return defaultNodeSize;
     };
   } else if (Array.isArray(nodeSize)) {
-    nodeSizeFunc = (d: Node) => {
-      const res = nodeSize[0] > nodeSize[1] ? nodeSize[0] : nodeSize[1];
-      return res + nodeSpacingFunc(d);
-    };
+    nodeSizeFunc = (d: Node) => nodeSize;
   } else if (isFunction(nodeSize)) {
-    nodeSizeFunc = nodeSize as (nodeData: Node) => number;
+    nodeSizeFunc = nodeSize;
   } else {
-    nodeSizeFunc = (d: Node) => nodeSize + nodeSpacingFunc(d);
+    nodeSizeFunc = (d: Node) => nodeSize;
   }
-  return nodeSizeFunc;
+
+  const func = (d: Node) => {
+    const nodeSize = nodeSizeFunc(d) as Size;
+    const nodeSpacing = nodeSpacingFunc(d);
+    return Math.max(...parseSize(nodeSize)) + nodeSpacing;
+  };
+
+  return func;
 };
