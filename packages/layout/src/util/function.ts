@@ -1,6 +1,6 @@
 import { isFunction, isNumber, isObject } from '@antv/util';
 import { Node } from '../types';
-import type { Size } from './size';
+import { parseSize, type Size } from './size';
 
 /**
  * Format value with multiple types into a function returns number.
@@ -85,50 +85,39 @@ export function formatSizeFn<T extends Node>(
  * @param nodeSpacing
  * @returns
  */
-export const formatNodeSize = (
-  nodeSize: Size | ((nodeData: Node) => Size) | undefined,
-  nodeSpacing: number | Function | undefined,
-): ((nodeData: Node) => Size) => {
+export const formatNodeSizeToNumber = (
+  nodeSize: Size | ((node: Node) => Size) | undefined,
+  nodeSpacing: number | ((node: Node) => number) | undefined,
+): ((node: Node) => number) => {
   let nodeSizeFunc;
-  let nodeSpacingFunc: Function;
-  if (isNumber(nodeSpacing)) {
-    nodeSpacingFunc = () => nodeSpacing;
-  } else if (isFunction(nodeSpacing)) {
-    nodeSpacingFunc = nodeSpacing;
-  } else {
-    nodeSpacingFunc = () => 0;
-  }
+  const nodeSpacingFunc =
+    typeof nodeSpacing === 'function' ? nodeSpacing : () => nodeSpacing || 0;
 
   if (!nodeSize) {
     nodeSizeFunc = (d: Node) => {
-      if (d.data?.bboxSize) {
-        return (
-          Math.max(d.data.bboxSize[0], d.data.bboxSize[1]) + nodeSpacingFunc(d)
-        );
-      }
+      if (d.data?.bboxSize) return d.data?.bboxSize;
       if (d.data?.size) {
-        if (Array.isArray(d.data.size)) {
-          return Math.max(d.data.size[0], d.data.size[1]) + nodeSpacingFunc(d);
-        }
         const dataSize = d.data.size;
-        if (isObject<{ width: number; height: number }>(dataSize)) {
-          const res =
-            dataSize.width > dataSize.height ? dataSize.width : dataSize.height;
-          return res + nodeSpacingFunc(d);
-        }
-        return dataSize + nodeSpacingFunc(d);
+        if (Array.isArray(dataSize)) return dataSize;
+        if (isObject<{ width: number; height: number }>(dataSize))
+          return [dataSize.width, dataSize.height];
+        return dataSize;
       }
-      return 10 + nodeSpacingFunc(d);
+      return 10;
     };
   } else if (Array.isArray(nodeSize)) {
-    nodeSizeFunc = (d: Node) => {
-      const res = nodeSize[0] > nodeSize[1] ? nodeSize[0] : nodeSize[1];
-      return res + nodeSpacingFunc(d);
-    };
+    nodeSizeFunc = (d: Node) => nodeSize;
   } else if (isFunction(nodeSize)) {
-    nodeSizeFunc = nodeSize as (nodeData: Node) => number;
+    nodeSizeFunc = nodeSize;
   } else {
-    nodeSizeFunc = (d: Node) => nodeSize + nodeSpacingFunc(d);
+    nodeSizeFunc = (d: Node) => nodeSize;
   }
-  return nodeSizeFunc;
+
+  const func = (d: Node) => {
+    const nodeSize = nodeSizeFunc(d);
+    const nodeSpacing = nodeSpacingFunc(d);
+    return Math.max(...parseSize(nodeSize)) + nodeSpacing;
+  };
+
+  return func;
 };
