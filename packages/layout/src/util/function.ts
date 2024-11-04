@@ -90,7 +90,7 @@ export const formatNodeSizeToNumber = (
   nodeSpacing: number | ((node: Node) => number) | undefined,
   defaultNodeSize: number = 10,
 ): ((node: Node) => number) => {
-  let nodeSizeFunc;
+  let nodeSizeFunc: (node: Node) => Size;
   const nodeSpacingFunc =
     typeof nodeSpacing === 'function' ? nodeSpacing : () => nodeSpacing || 0;
 
