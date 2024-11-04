@@ -9,8 +9,9 @@ import type {
   OutNode,
   PointTuple,
 } from './types';
-import { cloneFormatData, formatNumberFn, formatSizeFn, isArray } from './util';
+import { cloneFormatData, formatNumberFn, formatSizeFn } from './util';
 import { handleSingleNodeGraph } from './util/common';
+import { parseSize } from './util/size';
 
 type RowsAndCols = {
   rows: number;
@@ -46,7 +47,7 @@ const DEFAULTS_LAYOUT_OPTIONS: Partial<GridLayoutOptions> = {
 
 /**
  * <zh/> 网格布局
- * 
+ *
  * <en/> Grid layout
  */
 export class GridLayout implements Layout<GridLayoutOptions> {
@@ -69,7 +70,7 @@ export class GridLayout implements Layout<GridLayoutOptions> {
    * To directly assign the positions to the nodes.
    */
   async assign(graph: Graph, options?: GridLayoutOptions) {
-   await this.genericGridLayout(true, graph, options);
+    await this.genericGridLayout(true, graph, options);
   }
 
   private async genericGridLayout(
@@ -219,18 +220,7 @@ export class GridLayout implements Layout<GridLayoutOptions> {
         }
 
         const oNode = graph.getNode(node.id);
-        const res = nodeSize(oNode) || 30;
-
-        let nodeW;
-        let nodeH;
-
-        if (isArray(res)) {
-          nodeW = res[0];
-          nodeH = res[1];
-        } else {
-          nodeW = res;
-          nodeH = res;
-        }
+        const [nodeW, nodeH] = parseSize(nodeSize(oNode) || 30);
 
         const p =
           nodeSpacing !== undefined ? nodeSpacing(node) : preventOverlapPadding;

@@ -35,49 +35,44 @@ export function formatNumberFn<T = unknown>(
 export function formatSizeFn<T extends Node>(
   defaultValue: number,
   value?:
-    | number
-    | number[]
+    | Size
     | { width: number; height: number }
-    | ((d?: T) => number)
+    | ((d?: T) => Size)
     | undefined,
   resultIsNumber: boolean = true,
-): (d: T) => number | number[] {
+): (d: T) => Size {
   if (!value && value !== 0) {
     return (d) => {
       const { size } = d.data || {};
       if (size) {
-        if (resultIsNumber) {
-          if (Array.isArray(size)) return Math.max(...size);
-          if (isObject<{ width: number; height: number }>(size)) {
-            return Math.max(size.width, size.height) || defaultValue;
-          }
+        if (Array.isArray(size))
+          return resultIsNumber ? Math.max(...size) || defaultValue : size;
+        if (
+          isObject<{ width: number; height: number }>(size) &&
+          size.width &&
+          size.height
+        ) {
+          return resultIsNumber
+            ? Math.max(size.width, size.height) || defaultValue
+            : [size.width, size.height];
         }
         return size;
       }
       return defaultValue;
     };
   }
-  if (isFunction(value)) {
-    return value;
-  }
-  if (isNumber(value)) {
-    return () => value;
-  }
+  if (isFunction(value)) return value;
+  if (isNumber(value)) return () => value;
   if (Array.isArray(value)) {
     return () => {
-      if (resultIsNumber) {
-        const max = Math.max(...value);
-        return isNaN(max) ? defaultValue : max;
-      }
+      if (resultIsNumber) return Math.max(...value) || defaultValue;
       return value;
     };
   }
-  if (isObject(value)) {
+  if (isObject(value) && value.width && value.height) {
     return () => {
-      if (resultIsNumber) {
-        const max = Math.max(value.width, value.height);
-        return isNaN(max) ? defaultValue : max;
-      }
+      if (resultIsNumber)
+        return Math.max(value.width, value.height) || defaultValue;
       return [value.width, value.height];
     };
   }
