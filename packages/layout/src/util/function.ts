@@ -115,7 +115,7 @@ export const formatNodeSizeToNumber = (
   }
 
   const func = (d: Node) => {
-    const nodeSize = nodeSizeFunc(d);
+    const nodeSize = nodeSizeFunc(d) as Size;
     const nodeSpacing = nodeSpacingFunc(d);
     return Math.max(...parseSize(nodeSize)) + nodeSpacing;
   };

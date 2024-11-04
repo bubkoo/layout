@@ -11,6 +11,7 @@ import type {
 } from './types';
 import { cloneFormatData, isArray } from './util';
 import { handleSingleNodeGraph } from './util/common';
+import { parseSize } from './util/size';
 
 const DEFAULTS_LAYOUT_OPTIONS: Partial<ConcentricLayoutOptions> = {
   nodeSize: 30,
@@ -26,7 +27,7 @@ const DEFAULTS_LAYOUT_OPTIONS: Partial<ConcentricLayoutOptions> = {
 
 /**
  * <zh/> 同心圆布局
- * 
+ *
  * <en/> Concentric layout
  */
 export class ConcentricLayout implements Layout<ConcentricLayoutOptions> {
@@ -51,7 +52,7 @@ export class ConcentricLayout implements Layout<ConcentricLayoutOptions> {
    * To directly assign the positions to the nodes.
    */
   async assign(graph: Graph, options?: ConcentricLayoutOptions) {
-   await this.genericConcentricLayout(true, graph, options);
+    await this.genericConcentricLayout(true, graph, options);
   }
 
   private async genericConcentricLayout(
@@ -112,7 +113,7 @@ export class ConcentricLayout implements Layout<ConcentricLayoutOptions> {
     } else if (isFunction(nodeSize)) {
       maxNodeSize = -Infinity;
       nodes.forEach((node) => {
-        const currentSize = nodeSize(node);
+        const currentSize = Math.max(...parseSize(nodeSize(node)));
         if (currentSize > maxNodeSize) maxNodeSize = currentSize;
       });
     } else {
