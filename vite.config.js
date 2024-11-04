@@ -9,11 +9,6 @@ export default defineConfig({
   },
   // publicDir: "../packages/layout-wasm/dist",
   base: '/layout/',
-  resolve: {
-    alias: {
-      '@antv/layout': './packages/layout/src/index.ts',
-    },
-  },
   build: {
     rollupOptions: {
       input: {

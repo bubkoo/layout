@@ -6,9 +6,6 @@
     "jsx": "react",
     "allowJs": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
-    "paths": {
-      "@antv/layout": ["./packages/layout/src/index.ts"],
-    }
+    "allowSyntheticDefaultImports": true
   }
 }
