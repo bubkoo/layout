@@ -100,7 +100,7 @@ export class CircularLayout implements Layout<CircularLayoutOptions> {
     let { radius, startRadius, endRadius } = mergedOptions;
     if (paramNodeSpacing) {
       const nodeSpacing: Function = formatNumberFn(10, paramNodeSpacing);
-      const nodeSize: Function = formatSizeFn(10, paramNodeSize);
+      const nodeSize: Function = formatSizeFn(10, paramNodeSize, true);
       let maxNodeSize = -Infinity;
       nodes.forEach((node) => {
         const nSize = nodeSize(node);
