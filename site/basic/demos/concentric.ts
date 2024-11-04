@@ -1,6 +1,6 @@
 import type { Canvas } from '@antv/g';
 import { Graph } from '@antv/graphlib';
-import { ConcentricLayout } from '../../../packages/layout';
+import { ConcentricLayout } from '@antv/layout';
 import { countries } from '../data';
 import { renderNodes } from '../utils';
 

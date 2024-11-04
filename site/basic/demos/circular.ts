@@ -1,7 +1,7 @@
 import type { Canvas } from '@antv/g';
 import { Graph } from '@antv/graphlib';
 import type { GUI } from 'lil-gui';
-import { CircularLayout } from '../../../packages/layout';
+import { CircularLayout } from '@antv/layout';
 import { countries } from '../data';
 import { renderNodes } from '../utils';
 
