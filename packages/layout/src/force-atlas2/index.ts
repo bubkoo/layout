@@ -1,5 +1,5 @@
 import { Graph as GGraph } from '@antv/graphlib';
-import { isFunction, isNumber, isObject } from '@antv/util';
+import { isNumber } from '@antv/util';
 import type {
   Edge,
   EdgeData,
@@ -14,8 +14,9 @@ import type {
   OutNodeData,
   PointTuple,
 } from '../types';
-import { cloneFormatData, isArray } from '../util';
+import { cloneFormatData, formatNodeSizeToNumber } from '../util';
 import { handleSingleNodeGraph } from '../util/common';
+import type { Size } from '../util/size';
 import Body from './body';
 import Quad from './quad';
 import QuadTree from './quad-tree';
@@ -57,7 +58,7 @@ type CalcGraph = GGraph<OutNodeData, EdgeData>;
 
 /**
  * <zh/> Atlas2 力导向布局
- * 
+ *
  * <en/> Force Atlas 2 layout
  */
 export class ForceAtlas2Layout implements Layout<ForceAtlas2LayoutOptions> {
@@ -82,7 +83,7 @@ export class ForceAtlas2Layout implements Layout<ForceAtlas2LayoutOptions> {
    * To directly assign the positions to the nodes.
    */
   async assign(graph: Graph, options?: ForceAtlas2LayoutOptions) {
-   await this.genericForceAtlas2Layout(true, graph, options);
+    await this.genericForceAtlas2Layout(true, graph, options);
   }
 
   private async genericForceAtlas2Layout(
@@ -122,7 +123,7 @@ export class ForceAtlas2Layout implements Layout<ForceAtlas2LayoutOptions> {
       nodes: calcNodes,
       edges: calcEdges,
     });
-    const sizes: SizeMap = this.getSizes(calcGraph, graph, nodeSize);
+    const sizes: SizeMap = this.getSizes(calcGraph, nodeSize);
 
     this.run(calcGraph, graph, maxIteration, sizes, assign, mergedOptions);
 
@@ -164,41 +165,18 @@ export class ForceAtlas2Layout implements Layout<ForceAtlas2LayoutOptions> {
    * Init the node positions if there is no initial positions.
    * And pre-calculate the size (max of width and height) for each node.
    * @param calcGraph graph for calculation
-   * @param graph origin graph
    * @param nodeSize node size config from layout options
    * @returns {SizeMap} node'id mapped to max of its width and height
    */
   private getSizes(
     calcGraph: CalcGraph,
-    graph: Graph,
-    nodeSize?: number | number[] | ((d?: Node) => number),
+    nodeSize?: Size | ((d?: Node) => Size),
   ): SizeMap {
     const nodes = calcGraph.getAllNodes();
     const sizes: SizeMap = {};
     for (let i = 0; i < nodes.length; i += 1) {
-      const { id, data } = nodes[i];
-      sizes[id] = 10;
-      if (isNumber(data.size)) {
-        sizes[id] = data.size;
-      } else if (isArray(data.size)) {
-        if (!isNaN(data.size[0])) sizes[id] = Math.max(data.size[0]);
-        if (!isNaN(data.size[1])) sizes[id] = Math.max(data.size[1]);
-      } else if (isObject(data.size)) {
-        // @ts-ignore
-        sizes[id] = Math.max(data.size.width, data.size.height);
-      } else if (isFunction(nodeSize)) {
-        const originNode = graph.getNode(id);
-        const size = nodeSize(originNode);
-        if (isArray(size)) {
-          sizes[id] = Math.max(...size);
-        } else {
-          sizes[id] = size;
-        }
-      } else if (isArray(nodeSize)) {
-        sizes[id] = Math.max(...nodeSize);
-      } else if (isNumber(nodeSize)) {
-        sizes[id] = nodeSize;
-      }
+      const node = nodes[i];
+      sizes[node.id] = formatNodeSizeToNumber(nodeSize, undefined)(node);
     }
     return sizes;
   }

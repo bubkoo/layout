@@ -88,6 +88,7 @@ export function formatSizeFn<T extends Node>(
 export const formatNodeSizeToNumber = (
   nodeSize: Size | ((node: Node) => Size) | undefined,
   nodeSpacing: number | ((node: Node) => number) | undefined,
+  defaultNodeSize: number = 10,
 ): ((node: Node) => number) => {
   let nodeSizeFunc;
   const nodeSpacingFunc =
@@ -103,7 +104,7 @@ export const formatNodeSizeToNumber = (
           return [dataSize.width, dataSize.height];
         return dataSize;
       }
-      return 10;
+      return defaultNodeSize;
     };
   } else if (Array.isArray(nodeSize)) {
     nodeSizeFunc = (d: Node) => nodeSize;
