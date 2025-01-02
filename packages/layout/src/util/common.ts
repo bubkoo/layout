@@ -12,7 +12,7 @@ export const handleSingleNodeGraph = (
   assign: boolean,
   center: PointTuple,
 ) => {
-  const nodes = graph.getAllNodes();
+  const nodes = graph.getAllNodes().filter((node) => !node.data._isCombo);
   const edges = graph.getAllEdges();
   if (!nodes?.length) {
     const result = { nodes: [] as any[], edges };
